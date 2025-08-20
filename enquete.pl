@@ -1,7 +1,7 @@
-% =========================================
-% Projet IA – Enquête policiere (SWI-Prolog)
+
+% Projet IA  Enquête policiere (SWI-Prolog)
 % Serveur HTTP avec formulaire et verdict
-% =========================================
+% ========================================
 :- module(enquete, [server/0, server/1, stop/0]).
 
 :- use_module(library(http/thread_httpd)).
@@ -11,7 +11,7 @@
 :- use_module(library(http/http_error)).
 
 % -------------------------------
-% Supprimer warnings de faits disperses
+% Supprimer warnings de faits disperse
 % -------------------------------
 :- discontiguous has_motive/2.
 :- discontiguous was_near_crime_scene/2.
@@ -95,7 +95,7 @@ stop :-
     http_stop_server(Port, []),
     format('Serveur arrête (port ~w).~n', [Port]).
 
-% -------------------------------
+% ------------------------------
 % Pages
 % -------------------------------
 page_home(_Request) :-
@@ -103,7 +103,7 @@ page_home(_Request) :-
     all_crimes(Crimes),
     reply_html_page(
         page_style('Accueil'),
-        \page_header('Systeme expert – Enquête policiere'),
+        \page_header('Systeme expert Enquete policiere'),
         \form_block(Suspects, Crimes)
     ).
 
@@ -212,9 +212,9 @@ explain(S, C, guilty, Proofs) :-
     sort(Proofs0, Proofs), !.
 explain(_S, _C, not_guilty, []) :- !.
 
-proof_text(S, C, 'Mobile etabli')                       :- has_motive(S, C).
+proof_text(S, C, 'Mobile etabli')                :- has_motive(S, C).
 proof_text(S, C, 'Presence proche de la scene du crime'):- was_near_crime_scene(S, C).
-proof_text(S, C, 'Empreinte sur l''arme')               :- has_fingerprint_on_weapon(S, C).
-proof_text(S, C, 'Transaction bancaire suspecte')       :- has_bank_transaction(S, C).
-proof_text(S, C, 'Fausse identite detectee')           :- owns_fake_identity(S, C).
-proof_text(S, C, 'Temoin oculaire')                     :- eyewitness_identification(S, C).
+proof_text(S, C, 'Empreinte sur l''arme')        :- has_fingerprint_on_weapon(S, C).
+proof_text(S, C, 'Transaction bancaire suspecte')   :- has_bank_transaction(S, C).
+proof_text(S, C, 'Fausse identite detectee')       :- owns_fake_identity(S, C).
+proof_text(S, C, 'Temoin oculaire')            :- eyewitness_identification(S, C).
