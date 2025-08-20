@@ -1,4 +1,4 @@
-# Voici notre projet ia avec swi prolog
+# Voici notre projet IA avec swi prolog
 swipl
 1 ?- ['enquete']. 
 2 ?- server.
