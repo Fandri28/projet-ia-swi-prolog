@@ -156,11 +156,11 @@ form_block(Suspects, Crimes) -->
     html(div([style('display:flex; justify-content:center; margin-top:30px;')],
       form([action='/verdict', method='POST', style('display:flex; flex-direction:column; gap:15px; width:300px;')],
         [ div([style('display:flex; flex-direction:column;')],
-            [ label([for(suspect), style('margin-bottom:5px;')], 'Suspect'),
+            [ label([for(suspect), style('margin-bottom:5px;')], 'Suspect:'),
               select([name=suspect, id=suspect, style('padding:10px; border-radius:8px;')], \options_from_atoms(Suspects))
             ]),
           div([style('display:flex; flex-direction:column;')],
-            [ label([for(crime), style('margin-bottom:5px;')], 'Type de crime'),
+            [ label([for(crime), style('margin-bottom:5px;')], 'Type de crime:'),
               select([name=crime, id=crime, style('padding:10px; border-radius:8px;')], \options_from_atoms(Crimes))
             ]),
           input([type(submit), value('Analyser'), style('padding:12px; border:none; border-radius:8px; background-color:blue; color:white; cursor:pointer;')])

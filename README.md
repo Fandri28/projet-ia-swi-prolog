@@ -1,5 +1,15 @@
+
 # Voici notre projet IA avec swi prolog
-swipl
-1 ?- ['enquete']. 
-2 ?- server.
-dans web http://localhost:8001 
+git clone https://github.com/Fandri28/projet-ia-swi-prolog.git
+lance cmd une fois dans l'emplacement du dossier et tape
+
+swipl (avoir installer swi prolog)
+
+puis tape
+
+1 ?- ['enquete.pl'].
+
+et
+
+2 ?- server .
+
