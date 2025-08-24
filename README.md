@@ -1,6 +1,5 @@
-# Voici notre projet ia avec swi prolog
 
-
+# Voici notre projet IA avec swi prolog
 git clone https://github.com/Fandri28/projet-ia-swi-prolog.git
 lance cmd une fois dans l'emplacement du dossier et tape
 
@@ -13,3 +12,4 @@ puis tape
 et
 
 2 ?- server .
+
