@@ -1,7 +1,7 @@
 
-% Projet IA  Enquête policiere (SWI-Prolog)
+% Projet IA  Enquête policiere 
 % Serveur HTTP avec formulaire et verdict
-% ========================================
+
 :- module(enquete, [server/0, server/1, stop/0]).
 
 :- use_module(library(http/thread_httpd)).
