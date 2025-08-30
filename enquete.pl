@@ -10,9 +10,7 @@
 :- use_module(library(http/html_write)).
 :- use_module(library(http/http_error)).
 
-% -------------------------------
-% Supprimer warnings de faits disperse
-% -------------------------------
+
 :- discontiguous has_motive/2.
 :- discontiguous was_near_crime_scene/2.
 :- discontiguous has_fingerprint_on_weapon/2.
@@ -20,25 +18,23 @@
 :- discontiguous owns_fake_identity/2.
 :- discontiguous eyewitness_identification/2.
 
-% -------------------------------
-% Types de crime
-% -------------------------------
+
 crime_type(vol).
 crime_type(assassinat).
 crime_type(escroquerie).
 
-% -------------------------------
+
 % Suspects
-% -------------------------------
+
 suspect(john).
 suspect(mary).
 suspect(alice).
 suspect(bruno).
 suspect(sophie).
 
-% -------------------------------
-% Faits : indices et mobiles
-% -------------------------------
+
+
+
 % --- VOL ---
 has_motive(john, vol).
 was_near_crime_scene(john, vol).
@@ -58,9 +54,7 @@ owns_fake_identity(sophie, escroquerie).
 % --- Temoignage ---
 eyewitness_identification(mary, assassinat).
 
-% -------------------------------
-% Regles de culpabilite
-% -------------------------------
+
 is_guilty(S, vol) :-
     has_motive(S, vol),
     was_near_crime_scene(S, vol),
@@ -79,9 +73,7 @@ is_guilty(S, escroquerie) :-
     ; owns_fake_identity(S, escroquerie)
     ).
 
-% -------------------------------
-% Serveur HTTP & Routes
-% -------------------------------
+
 :- http_handler(root(.), page_home, []).
 :- http_handler(root(verdict), page_verdict, []).
 
@@ -95,9 +87,9 @@ stop :-
     http_stop_server(Port, []),
     format('Serveur arrête (port ~w).~n', [Port]).
 
-% ------------------------------
+
 % Pages
-% -------------------------------
+
 page_home(_Request) :-
     all_suspects(Suspects),
     all_crimes(Crimes),
@@ -135,9 +127,7 @@ page_verdict(Request) :-
       )
     ).
 
-% -------------------------------
-% Vues (HTML avec CSS inline et flex)
-% -------------------------------
+% HTML/CSS 
 page_style(Title) -->
     html([
         head([
@@ -197,15 +187,13 @@ proof_items([P|Ps]) --> html(li([style('margin-bottom:3px;')], P)), proof_items(
 options_from_atoms([]) --> [].
 options_from_atoms([A|As]) --> html(option([value(A)], A)), options_from_atoms(As).
 
-% -------------------------------
-% Donnees utilitaires
-% -------------------------------
+
 all_suspects(Ss) :- findall(S, suspect(S), Raw), sort(Raw, Ss).
 all_crimes(Cs)   :- findall(C, crime_type(C), Raw), sort(Raw, Cs).
 
-% -------------------------------
-% Explication / justification
-% -------------------------------
+
+% Explication 
+
 explain(S, C, guilty, Proofs) :-
     is_guilty(S, C),
     findall(Text, proof_text(S, C, Text), Proofs0),
